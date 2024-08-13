@@ -40,7 +40,40 @@ describe('AppComponent', () => {
   it('should render router outlet', () => {
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
     // expect(compiled.querySelector('router-outlet')).not.toBeNull(); //** asi esta en el curso **
+  });
 
-    // expect(compiled.querySelector('h1')?.textContent).toContain('Hello, zoneless-calculator');
+  it('shoul render rounter-outlet wrapped with css class', () => {
+    const divELement = compiled.querySelector('div');
+
+    const mustHaveClasses =
+      'min-w-screen min-h-screen bg-slate-600 flex items-center justify-center px-5 py-5'.split(
+        ' '
+      );
+
+    const divClasses = divELement?.classList.value.split(' ');
+
+    expect(divELement).not.toBeNull();
+
+    // divELement?.classList.forEach((className) => {
+    //   expect(mustHaveClasses).toContain(className);
+    // });
+
+    mustHaveClasses.forEach((className) => {
+      expect(divClasses).toContain(className);
+    });
+  });
+
+  it("should contain 'Buy me a beer' link", () => {
+    const aElement = compiled.querySelector('a');
+
+    const aTitle = aElement?.getAttribute('title');
+
+    const aHref = aElement?.getAttribute('href');
+
+    expect(aElement).not.toBeNull();
+
+    expect(aTitle).toContain('Buy me a beer');
+
+    expect(aHref).toContain('https://www.buymeacoffee.com/scottwindon');
   });
 });
